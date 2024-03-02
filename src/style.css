@@ -10,6 +10,7 @@ body {
 }
 
 #drawButton {
+  margin-left: 9px;
   cursor: pointer;
   border-radius: 9px;
   background-color: #0043ff;
@@ -21,6 +22,10 @@ body {
   border-radius: 9px;
   background-color: #0043ff;
   color: powderblue;
+}
+
+h1 {
+  padding: 66px;
 }
 
 /* Contenedor principal */
@@ -37,6 +42,7 @@ body {
 
 label {
   margin: 9px;
+  margin-right: auto;
   background-color: #ffffffcf;
   border-radius: 12px;
   padding: 6px;
