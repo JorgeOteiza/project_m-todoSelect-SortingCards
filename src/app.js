@@ -1,3 +1,4 @@
+// app.js
 import "./style.css";
 
 const suitsSymbols = {
@@ -5,6 +6,13 @@ const suitsSymbols = {
   club: "♣",
   heart: "♥",
   diamond: "♦"
+};
+
+const mapper = {
+  A: 1,
+  J: 11,
+  Q: 12,
+  K: 13
 };
 
 function getRandomNumber(min, max) {
@@ -59,27 +67,35 @@ function generateRandomCards(numCards) {
   }
 }
 
-function bubbleSort() {
+function selectionSort() {
   const cardsContainer = document.getElementById("cardsContainer");
   const cardsArray = Array.from(cardsContainer.children);
 
   for (let i = 0; i < cardsArray.length - 1; i++) {
-    for (let j = 0; j < cardsArray.length - 1 - i; j++) {
+    let minIndex = i;
+    for (let j = i + 1; j < cardsArray.length; j++) {
       const currentCard = cardsArray[j];
-      const nextCard = cardsArray[j + 1];
+      const minCard = cardsArray[minIndex];
 
-      const currentCardValue = parseInt(
-        currentCard.querySelector(".centered-text").textContent
-      );
-      const nextCardValue = parseInt(
-        nextCard.querySelector(".centered-text").textContent
-      );
+      const currentCardValueText = currentCard.querySelector(".centered-text")
+        .textContent;
+      const minCardValueText = minCard.querySelector(".centered-text")
+        .textContent;
 
-      if (currentCardValue > nextCardValue) {
-        cardsContainer.insertBefore(nextCard, currentCard);
-        cardsArray[j] = nextCard;
-        cardsArray[j + 1] = currentCard;
+      const currentCardValue =
+        mapper[currentCardValueText] || parseInt(currentCardValueText);
+      const minCardValue =
+        mapper[minCardValueText] || parseInt(minCardValueText);
+
+      if (currentCardValue < minCardValue) {
+        minIndex = j;
       }
+    }
+    if (minIndex !== i) {
+      const temp = cardsArray[i];
+      cardsArray[i] = cardsArray[minIndex];
+      cardsArray[minIndex] = temp;
+      cardsContainer.insertBefore(cardsArray[minIndex], cardsArray[i]);
     }
   }
 }
@@ -90,6 +106,5 @@ document.getElementById("drawButton").addEventListener("click", () => {
 });
 
 document.getElementById("sortButton").addEventListener("click", () => {
-  generateRandomCards(document.getElementById("numCards").value);
-  bubbleSort();
+  selectionSort();
 });
