@@ -1,110 +1,106 @@
-// app.js
-import "./style.css";
-
-const suitsSymbols = {
-  spade: "♠",
-  club: "♣",
-  heart: "♥",
-  diamond: "♦"
-};
-
-const mapper = {
-  A: 1,
-  J: 11,
-  Q: 12,
-  K: 13
-};
-
-function getRandomNumber(min, max) {
-  return Math.floor(Math.random() * (max - min + 1)) + min;
-}
-
-function generateCard(randomSuit, randomCardNumber) {
-  const card = document.createElement("div");
-  card.className = "card";
-
-  const topSymbol = document.createElement("div");
-  topSymbol.className = "corner-symbol top-left";
-  topSymbol.textContent = suitsSymbols[randomSuit];
-
-  const bottomSymbol = document.createElement("div");
-  bottomSymbol.className = "corner-symbol bottom-right";
-  bottomSymbol.textContent = suitsSymbols[randomSuit];
-
-  const centeredText = document.createElement("div");
-  centeredText.className = "centered-text";
-  const cardNumber =
-    randomCardNumber < 9
-      ? randomCardNumber + 2
-      : ["J", "Q", "K", "A"][randomCardNumber - 9];
-  centeredText.textContent = cardNumber;
-
-  if (randomSuit === "heart" || randomSuit === "diamond") {
-    topSymbol.style.color = "red";
-    bottomSymbol.style.color = "red";
-  }
-
-  card.appendChild(topSymbol);
-  card.appendChild(centeredText);
-  card.appendChild(bottomSymbol);
-
-  return card.outerHTML;
-}
-
-function generateRandomCards(numCards) {
+function generateCards(numCards) {
+  const suits = ["\u2660", "\u2663", "\u2665", "\u2666"]; // Unicode for spade, club, heart, and diamond
+  const values = [
+    "A",
+    "2",
+    "3",
+    "4",
+    "5",
+    "6",
+    "7",
+    "8",
+    "9",
+    "10",
+    "J",
+    "Q",
+    "K"
+  ];
   const cardsContainer = document.getElementById("cardsContainer");
+
   cardsContainer.innerHTML = "";
 
   for (let i = 0; i < numCards; i++) {
-    const randomSuitIndex = getRandomNumber(0, 3);
-    const randomCardNumber = getRandomNumber(0, 13);
-    const randomSuit = Object.keys(suitsSymbols)[randomSuitIndex];
+    const suit = suits[Math.floor(Math.random() * suits.length)];
+    const value = values[Math.floor(Math.random() * values.length)];
 
-    cardsContainer.insertAdjacentHTML(
-      "beforeend",
-      generateCard(randomSuit, randomCardNumber)
-    );
+    const card = document.createElement("div");
+    card.classList.add("card");
+
+    const topLeft = document.createElement("div");
+    topLeft.classList.add("corner-symbol", "top-left");
+    topLeft.textContent = suit;
+
+    const bottomRight = document.createElement("div");
+    bottomRight.classList.add("corner-symbol", "bottom-right");
+    bottomRight.textContent = suit;
+
+    const centeredText = document.createElement("div");
+    centeredText.classList.add("centered-text");
+    centeredText.textContent = value;
+
+    card.appendChild(topLeft);
+    card.appendChild(bottomRight);
+    card.appendChild(centeredText);
+
+    cardsContainer.appendChild(card);
   }
 }
 
-function selectionSort() {
-  const cardsContainer = document.getElementById("cardsContainer");
-  const cardsArray = Array.from(cardsContainer.children);
+function selectionSort(arr) {
+  const len = arr.length;
+  const log = [];
 
-  for (let i = 0; i < cardsArray.length - 1; i++) {
+  // Mapeo de las letras a sus valores numéricos
+  const mapper = {
+    A: 1,
+    J: 11,
+    Q: 12,
+    K: 13
+  };
+
+  const mapCardsLetters = value => {
+    return parseInt(mapper[value] || value);
+  };
+
+  // Ordenamiento por selección
+  for (let i = 0; i < len - 1; i++) {
     let minIndex = i;
-    for (let j = i + 1; j < cardsArray.length; j++) {
-      const currentCard = cardsArray[j];
-      const minCard = cardsArray[minIndex];
 
-      const currentCardValueText = currentCard.querySelector(".centered-text")
-        .textContent;
-      const minCardValueText = minCard.querySelector(".centered-text")
-        .textContent;
+    for (let j = i + 1; j < len; j++) {
+      const value1 = mapCardsLetters(
+        arr[j].querySelector(".centered-text").textContent
+      );
+      const value2 = mapCardsLetters(
+        arr[minIndex].querySelector(".centered-text").textContent
+      );
 
-      const currentCardValue =
-        mapper[currentCardValueText] || parseInt(currentCardValueText);
-      const minCardValue =
-        mapper[minCardValueText] || parseInt(minCardValueText);
-
-      if (currentCardValue < minCardValue) {
+      log.push(arr);
+      if (value1 < value2) {
         minIndex = j;
       }
     }
+
     if (minIndex !== i) {
-      const temp = cardsArray[i];
-      cardsArray[i] = cardsArray[minIndex];
-      cardsArray[minIndex] = temp;
-      cardsContainer.insertBefore(cardsArray[minIndex], cardsArray[i]);
+      const temp = arr[i];
+      arr[i] = arr[minIndex];
+      arr[minIndex] = temp;
     }
   }
+
+  return log;
 }
 
-document.getElementById("drawButton").addEventListener("click", () => {
-  const numCards = document.getElementById("numCards").value;
-  generateRandomCards(numCards);
-});
+document.addEventListener("DOMContentLoaded", () => {
+  const drawButton = document.getElementById("drawButton");
+  const sortButton = document.getElementById("sortButton");
 
-document.getElementById("sortButton").addEventListener("click", () => {
-  selectionSort();
+  drawButton.addEventListener("click", () => {
+    const numCards = document.getElementById("numCards").value;
+    generateCards(numCards);
+  });
+
+  sortButton.addEventListener("click", () => {
+    const cards = document.querySelectorAll(".card");
+    selectionSort(cards);
+  });
 });
