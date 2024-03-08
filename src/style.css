@@ -1,12 +1,10 @@
-@import "~bootstrap/dist/css/bootstrap.min.css";
-
 body {
   display: flex;
   justify-content: center;
   align-items: center;
   height: 100vh;
   margin: 0;
-  background-color: rgb(4, 94, 4);
+  background-color: #198754;
 }
 
 #drawButton {
@@ -25,13 +23,13 @@ body {
 
 /* Contenedor principal */
 .box-card {
-  background-color: green;
+  background-color: #198754;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   max-width: 100%;
-  height: 94vh;
+  height: 100vh;
   padding: 20px;
 }
 
@@ -73,8 +71,8 @@ label {
 }
 
 .centered-text {
+  padding: 69px;
   font-size: 36px;
-  width: 100px;
   text-align: center;
 }
 
@@ -90,7 +88,7 @@ label {
 
 .bottom-right {
   bottom: 0;
-  right: 10px;
+  right: 6px;
   transform: rotateX(180deg);
 }
 

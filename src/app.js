@@ -48,7 +48,6 @@ function generateCards(numCards) {
 
 function selectionSort(arr) {
   const len = arr.length;
-  const log = [];
 
   // Mapeo de las letras a sus valores numéricos
   const mapper = {
@@ -74,7 +73,6 @@ function selectionSort(arr) {
         arr[minIndex].querySelector(".centered-text").textContent
       );
 
-      log.push(arr);
       if (value1 < value2) {
         minIndex = j;
       }
@@ -87,7 +85,12 @@ function selectionSort(arr) {
     }
   }
 
-  return log;
+  // Para actualizar el DOM con el nuevo orden de las cartas
+  const cardsContainer = document.getElementById("cardsContainer");
+  cardsContainer.innerHTML = "";
+  arr.forEach(card => {
+    cardsContainer.appendChild(card);
+  });
 }
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -101,6 +104,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
   sortButton.addEventListener("click", () => {
     const cards = document.querySelectorAll(".card");
-    selectionSort(cards);
+    selectionSort(Array.from(cards)); // Convertir NodeList a Array para usar métodos de array
   });
 });
