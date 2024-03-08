@@ -38,6 +38,11 @@ function generateCards(numCards) {
     centeredText.classList.add("centered-text");
     centeredText.textContent = value;
 
+    if (suit === "\u2665" || suit === "\u2666") {
+      topLeft.style.color = "red";
+      bottomRight.style.color = "red";
+    }
+
     card.appendChild(topLeft);
     card.appendChild(bottomRight);
     card.appendChild(centeredText);
@@ -49,7 +54,6 @@ function generateCards(numCards) {
 function selectionSort(arr) {
   const len = arr.length;
 
-  // Mapeo de las letras a sus valores numéricos
   const mapper = {
     A: 1,
     J: 11,
@@ -61,7 +65,6 @@ function selectionSort(arr) {
     return parseInt(mapper[value] || value);
   };
 
-  // Ordenamiento por selección
   for (let i = 0; i < len - 1; i++) {
     let minIndex = i;
 
@@ -85,7 +88,6 @@ function selectionSort(arr) {
     }
   }
 
-  // Para actualizar el DOM con el nuevo orden de las cartas
   const cardsContainer = document.getElementById("cardsContainer");
   cardsContainer.innerHTML = "";
   arr.forEach(card => {
@@ -104,6 +106,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
   sortButton.addEventListener("click", () => {
     const cards = document.querySelectorAll(".card");
-    selectionSort(Array.from(cards)); // Convertir NodeList a Array para usar métodos de array
+    selectionSort(Array.from(cards));
   });
 });

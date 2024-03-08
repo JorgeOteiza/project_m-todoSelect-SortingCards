@@ -1,36 +1,26 @@
-body {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-  margin: 0;
-  background-color: #198754;
-}
-
-#drawButton {
-  cursor: pointer;
-  border-radius: 9px;
-  background-color: #0043ff;
-  color: powderblue;
-}
-
+#drawButton,
 #sortButton {
   cursor: pointer;
   border-radius: 9px;
-  background-color: #0043ff;
-  color: powderblue;
+  background-color: #0043ff !important;
+  color: lightblue !important;
 }
 
-/* Contenedor principal */
-.box-card {
-  background-color: #198754;
+body {
+  margin: 0;
+  font-family: var(--bs-body-font-family);
+  font-size: var(--bs-body-font-size);
+  font-weight: var(--bs-body-font-weight);
+  line-height: var(--bs-body-line-height);
+  color: var(--bs-body-color);
+  text-align: var(--bs-body-text-align);
+  -webkit-text-size-adjust: 100%;
+  -webkit-tap-highlight-color: transparent;
   display: flex;
-  flex-direction: column;
-  align-items: center;
   justify-content: center;
-  max-width: 100%;
+  align-items: center;
   height: 100vh;
-  padding: 20px;
+  background-color: #198754 !important;
 }
 
 label {
@@ -43,7 +33,25 @@ label {
   line-height: normal;
 }
 
-/* Contenedor de columnas */
+.heart-symbol,
+.diamond-symbol {
+  font-size: 60px;
+  width: 60px;
+  height: 60px;
+  display: inline-block;
+  margin-right: 5px;
+}
+
+.heart-symbol::before {
+  content: "\2665";
+  color: red;
+}
+
+.diamond-symbol::before {
+  content: "\2666";
+  color: red;
+}
+
 .columns-container,
 .cards-container {
   display: flex;
@@ -103,14 +111,7 @@ label {
 .card .spade::before {
   content: "\2660";
 }
+
 .card .club::before {
   content: "\2663";
-}
-.card .heart::before {
-  content: "\2665";
-  color: red;
-}
-.card .diamond::before {
-  content: "\2666";
-  color: red;
 }
