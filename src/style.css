@@ -115,3 +115,10 @@ label {
 .card .club::before {
   content: "\2663";
 }
+
+.cards-log {
+  margin: 10px;
+  padding: 3px;
+  width: auto;
+  height: auto;
+}

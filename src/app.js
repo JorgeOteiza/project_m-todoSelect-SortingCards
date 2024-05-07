@@ -1,3 +1,6 @@
+/* eslint-disable no-undef */
+let steps = [];
+
 function generateCards(numCards) {
   const suits = ["\u2660", "\u2663", "\u2665", "\u2666"]; // Unicode for spade, club, heart, and diamond
   const values = [
@@ -51,6 +54,11 @@ function generateCards(numCards) {
   }
 }
 
+function registerStep(cards) {
+  // Guardar el estado actual de las cartas en el array de pasos
+  steps.push(cards.map(card => card.outerHTML));
+}
+
 function selectionSort(arr) {
   const len = arr.length;
 
@@ -85,6 +93,14 @@ function selectionSort(arr) {
       const temp = arr[i];
       arr[i] = arr[minIndex];
       arr[minIndex] = temp;
+
+      // Registro del cambio en el orden de las cartas
+      const logRow = document.createElement("div");
+      logRow.classList.add("log-row");
+      logRow.textContent = `Se intercambió la carta ${i +
+        1} con la carta ${minIndex + 1}`;
+      const logContainer = document.getElementById("logContainer");
+      logContainer.appendChild(logRow);
     }
   }
 
@@ -102,10 +118,24 @@ document.addEventListener("DOMContentLoaded", () => {
   drawButton.addEventListener("click", () => {
     const numCards = document.getElementById("numCards").value;
     generateCards(numCards);
+    steps = [];
   });
 
   sortButton.addEventListener("click", () => {
     const cards = document.querySelectorAll(".card");
     selectionSort(Array.from(cards));
+    // Mostrar los registros en diferentes columnas en la interfaz de usuario
+    const columnsContainer = document.getElementById("columnsContainer");
+    if (columnsContainer) {
+      columnsContainer.innerHTML = ""; // Limpiar las columnas existentes
+      steps.forEach((step, index) => {
+        const column = document.createElement("div");
+        column.classList.add("column");
+        column.innerHTML = `<h3>Step ${index + 1}</h3>${step.join("")}`;
+        columnsContainer.appendChild(column);
+      });
+    } else {
+      // console.error("id 'columnsContainer' not found.");
+    }
   });
 });
