@@ -3,25 +3,17 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Sorting Cards</title>
-    <link rel="stylesheet" href="src/style.css" />
-    <link
-      rel="stylesheet"
-      href="node_modules/bootstrap/dist/css/bootstrap.min.css"
-    />
+    <title>Orden de cartas, método select</title>
+    <link rel="stylesheet" type="text/css" href="src/style.css" />
   </head>
   <body>
-    <div class="container">
-      <h1>Select Cards</h1>
-      <div class="controls">
-        <label for="numCards">Cantidad de cartas:</label>
-        <input type="number" id="numCards" min="1" max="12" />
-        <button id="drawButton">Generar cartas</button>
-        <button id="sortButton">Ordenar cartas</button>
-      </div>
-      <div id="cardsContainer" class="cards-container"></div>
-      <div id="logContainer" class="cards-log"></div>
-    </div>
-    <script type="module" src="src/app.js"></script>
+    <h5>Cantidad de cartas:</h5>
+    <input type="number" id="numCards" />
+    <button id="draw">Generar cartas</button>
+    <button id="sort">Ordenar cartas</button>
+    <div class="cards-container" id="cardsContainer"></div>
+    <div class="bubble-log" id="selectionLog"></div>
+
+    <script src="src/app.js" type="module"></script>
   </body>
 </html>

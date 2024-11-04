@@ -1,43 +1,49 @@
+/* Botones de generación y ordenamiento */
 #drawButton,
-#sortButton {
+#sortButton,
+button {
   cursor: pointer;
   border-radius: 9px;
   background-color: #0043ff !important;
   color: lightblue !important;
-}
-
-#logContainer {
-  display: flex;
-  flex-direction: column; /* Mantener las filas de intercambio una sobre otra */
-  max-height: 40vh; /* Ajustar según la altura deseada de la pantalla */
-  overflow-y: auto; /* Permite desplazamiento vertical si el contenido supera la altura */
-  border: 1px solid #ddd; /* Opcional: borde para diferenciar el contenedor */
   padding: 10px;
-  gap: 10px; /* Espacio entre filas */
+  margin: 5px;
+  box-shadow: 0px 0px 12px rgb(172, 255, 47);
 }
 
-.log-row {
+/* Contenedor de registro */
+#logContainer,
+#selectionLog {
+  display: flex;
+  flex-direction: column;
+  max-height: 60vh;
+  overflow-y: auto;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+/* Estilo de cada fila en el registro */
+.log-row, .card-row {
   display: flex;
   gap: 10px;
+  margin: 6px;
+  justify-content: center;
 }
 
+/* Estilo general del cuerpo */
 body {
   margin: 0;
-  font-family: var(--bs-body-font-family);
-  font-size: var(--bs-body-font-size);
-  font-weight: var(--bs-body-font-weight);
-  line-height: var(--bs-body-line-height);
-  color: var(--bs-body-color);
-  text-align: var(--bs-body-text-align);
-  -webkit-text-size-adjust: 100%;
-  -webkit-tap-highlight-color: transparent;
+  font-family: Arial, sans-serif;
   display: flex;
-  justify-content: center;
+  flex-direction: column;
   align-items: center;
-  height: 100vh;
-  background-color: #198754 !important;
+  min-height: 100vh;
+  color: #fff;
+  justify-content: center;
+    background-color: indigo;
 }
 
+/* Etiquetas y contenedor de cartas */
 label {
   margin: 9px;
   background-color: #ffffffcf;
@@ -48,97 +54,73 @@ label {
   line-height: normal;
 }
 
-.heart-symbol,
-.diamond-symbol {
-  font-size: 60px;
-  width: 60px;
-  height: 60px;
-  display: inline-block;
-  margin-right: 5px;
-}
-
-.heart-symbol::before {
-  content: "\2665";
-  color: red;
-}
-
-.diamond-symbol::before {
-  content: "\2666";
-  color: red;
-}
-
-.columns-container,
-.cards-container {
+/* Contenedores para disposición de cartas */
+.cards-container,
+.columns-container {
   display: flex;
   flex-wrap: wrap;
   gap: 20px;
   justify-content: center;
+  max-width: 800px;
+  margin-top: 20px;
 }
 
+/* Estilo de la carta */
 .card {
-  width: calc(24% - 162px);
-  margin-top: 48px;
-  height: 189px;
-  border-radius: 9px;
+  width: 100px;
+  height: 160px;
+  border-radius: 10px;
   border: 1px solid black;
   background-color: white;
-  box-shadow: 6px 6px 15px black;
+  box-shadow: 3px 3px 12px rgba(0, 0, 0, 0.3);
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
+  position: relative;
+  padding: 10px;
+  font-size: 24px;
 }
 
-.numCards {
-  size-adjust: 10px;
-}
-
-.centered-text {
-  padding: 69px;
-  font-size: 36px;
-  text-align: center;
-}
-
+/* Símbolos en las esquinas */
 .corner-symbol {
-  font-size: 60px;
+  font-size: 39px;
   position: absolute;
 }
 
 .top-left {
-  top: 0;
-  left: 6px;
+  top: 8px;
+  left: 10px;
 }
 
 .bottom-right {
-  bottom: 0;
-  right: 6px;
-  transform: rotateX(180deg);
+  bottom: 8px;
+  right: 10px;
+  transform: rotate(180deg);
 }
 
-.card::before {
-  font-size: 72px;
+/* Texto centrado en la carta */
+.centered-text {
+  font-size: 36px;
   color: black;
-  position: absolute;
-  margin-top: 0;
-  margin-left: 0;
+  text-align: center;
 }
 
-.card .spade::before {
-  content: "\2660";
+/* Colores para corazones y diamantes */
+.red-suit {
+  color: red;
 }
 
-.card .club::before {
-  content: "\2663";
+.black-suit {
+  color: black;
 }
 
-.cards-log {
-  margin: 10px;
-  padding: 3px;
-  width: auto;
-  height: auto;
-}
-
-.log-row .card {
+/* Log de cada fila con borde */
+.log-row .card,
+.card-row .card {
   margin: 5px;
   border: 2px solid #0043ff;
+  justify-content: center;
 }
+
+
