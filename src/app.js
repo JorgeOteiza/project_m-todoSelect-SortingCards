@@ -90,15 +90,22 @@ function selectionSort(arr) {
     }
 
     if (minIndex !== i) {
+      // Intercambio de las cartas en el arreglo
       const temp = arr[i];
       arr[i] = arr[minIndex];
       arr[minIndex] = temp;
 
-      // Registro del cambio en el orden de las cartas
+      // Visualización del cambio en el contenedor de registros
       const logRow = document.createElement("div");
       logRow.classList.add("log-row");
-      logRow.textContent = `Se intercambió la carta ${i +
-        1} con la carta ${minIndex + 1}`;
+
+      // Clonar las cartas y agregarlas al registro
+      const clonedCard1 = arr[i].cloneNode(true);
+      const clonedCard2 = arr[minIndex].cloneNode(true);
+
+      logRow.appendChild(clonedCard1);
+      logRow.appendChild(clonedCard2);
+
       const logContainer = document.getElementById("logContainer");
       logContainer.appendChild(logRow);
     }

@@ -6,6 +6,21 @@
   color: lightblue !important;
 }
 
+#logContainer {
+  display: flex;
+  flex-direction: column; /* Mantener las filas de intercambio una sobre otra */
+  max-height: 40vh; /* Ajustar según la altura deseada de la pantalla */
+  overflow-y: auto; /* Permite desplazamiento vertical si el contenido supera la altura */
+  border: 1px solid #ddd; /* Opcional: borde para diferenciar el contenedor */
+  padding: 10px;
+  gap: 10px; /* Espacio entre filas */
+}
+
+.log-row {
+  display: flex;
+  gap: 10px;
+}
+
 body {
   margin: 0;
   font-family: var(--bs-body-font-family);
@@ -121,4 +136,9 @@ label {
   padding: 3px;
   width: auto;
   height: auto;
+}
+
+.log-row .card {
+  margin: 5px;
+  border: 2px solid #0043ff;
 }
